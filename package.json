@@ -4,21 +4,26 @@
   "description": "Track landmarks with geolocation and photos",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seeds": "node seeds/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gavin-asay/landmark-tracker.git"
   },
-  "author": "Gavin Asay, Hunter Strunk, Kyle Condie",
+  "author": "Gavin Asay, Hunter Strunk, Kyle Condie, Lexie Hansen",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gavin-asay/landmark-tracker/issues"
   },
   "homepage": "https://github.com/gavin-asay/landmark-tracker#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "connect-session-sequelize": "^7.1.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.1",
+    "express-session": "^1.17.1",
     "handlebars": "^4.7.7",
     "mysql2": "^2.2.5",
     "sequelize": "^6.5.0"
