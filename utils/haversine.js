@@ -3,7 +3,7 @@
 // we'll likely want this to sort landmarks by distance from user's location
 // An SQL god could probably crunch these numbers in a single query, but uh, I know JavaScript
 // this returns as-the-crow-flies distance, Google can give travel distance (by car, etc.)
-const haversineDistance = ([lat1, lon1], [lat2, lon2], isMiles = true) => {
+const haversineDistance = ([lat1, lon1], [lat2 = 40.76, lon2 = 111.89], isMiles = true) => {
 	const toRadian = angle => (Math.PI / 180) * angle;
 	const distance = (a, b) => (Math.PI / 180) * (a - b);
 	const RADIUS_OF_EARTH_IN_KM = 6371;

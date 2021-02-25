@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, Op } = require('sequelize');
 const sequelize = require('../config/connection');
 const haversineDistance = require('../utils/haversine');
 
@@ -59,13 +59,19 @@ Landmark.init(
 		freezeTableName: true,
 		modelName: 'landmark',
 		hooks: {
-			afterFind(dbLandmarkData) {
+			afterFind(dbLandmarkData, { user_lat, user_lon }) {
 				// this will automatically serialize the data, add the distance from user's location to each landmark, and sort the results by distance
 				// assuming it works, don't have any data to test it on yet
-				let landmarks = dbLandmarkData.map(result => result.get({ plain: true }));
-				landmarks.forEach(landmark => {
-					landmark.distance = haversineDistance([landmark.lat, landmark.lon], [req.body.user_lat, req.body.user_lon]);
-				});
+				let landmarks;
+				if (Array.isArray(dbLandmarkData)) {
+					landmarks = dbLandmarkData.map(landmark => landmark.get({ plain: true }));
+					landmarks.forEach(landmark => {
+						landmark.distance = haversineDistance([landmark.lat, landmark.lon], [user_lat, user_lon]);
+					});
+				} else {
+					landmarks = dbLandmarkData.get({ plain: true });
+					landmarks.distance = landmark.distance = haversineDistance([landmark.lat, landmark.lon], [user_lat, user_lon]);
+				}
 				return landmarks.sort((a, b) => a.distance - b.distance);
 			},
 		},
