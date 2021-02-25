@@ -1,0 +1,16 @@
+.mapArea {
+    width: 90%;
+    height: 500px;
+  }
+  
+  .alert {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+    background-color: red;
+    color: white;
+  }
+  
+  .d-none {
+    display: none;
+  }
