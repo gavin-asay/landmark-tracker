@@ -13,53 +13,13 @@
 
   <main>
     <div id="map" class="mapArea"></div>
-
     <div id="errorArea" class="alert d-none">
     </div>
   </main>
 
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="./utils/google-maps.js"></script>
-  <script>
-    'use strict';
-
-    var gmapController = (function () {
-      function initialize() {
-        geoController.getCurrentPosition(displayPosition, displayError);
-      }
-
-      function displayPosition(pos) {
-        let coords = pos.coords;
-        $("#lat").text(coords.latitude);
-        $("#long").text(coords.longitude);
-
-        addMap(coords);
-      }
-
-      function displayError(msg) {
-        $("#errorArea").removeClass("d-none");
-        $("#errorArea").html(msg);
-      }
-
-      function addMap(location) {
-        // Create a lat/lng object
-        let pos = new google.maps.LatLng(location.latitude, location.longitude);
-        // Create map options
-        let mapOptions = {
-          center: pos,
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        // Create new google map
-        let map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      }
-      
-      return {
-        "initialize": initialize
-      }
-    })();
-  </script>
+  <script src="./public/javascript/add_landmark.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMd2i_nedPspCAJnJ8CoKbtGeRAsf03Zk&callback=gmapController.initialize"
     type="text/javascript"></script>
 </body>

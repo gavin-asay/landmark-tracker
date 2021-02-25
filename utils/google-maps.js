@@ -91,3 +91,59 @@ let geoController = (function () {
     }
   }
 })();
+
+var gmapController = (function () {
+    function initialize() {
+      geoController.getCurrentPosition(displayPosition, displayError);
+
+      locationObj();
+
+        addMap(locationsArray[0]);
+        for (let index = 0; index < locationsArray.length; index++) {
+          // Add marker for location
+          addMarker(locationsArray[index]);
+        }
+    }
+
+    function displayPosition(pos) {
+      let coords = pos.coords;
+      $("#lat").text(coords.latitude);
+      $("#long").text(coords.longitude);
+
+      addMap(coords);
+    }
+
+    function displayError(msg) {
+      $("#errorArea").removeClass("d-none");
+      $("#errorArea").html(msg);
+    }
+
+    function addMap(location) {
+      // Create a lat/lng object
+      let pos = new google.maps.LatLng(location.latitude, location.longitude);
+      // Create map options
+      let mapOptions = {
+        center: pos,
+        zoom: 16,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      // Create new google map
+      let map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    }
+
+    function addMarker(location) {
+        location.marker = new google.maps.Marker({
+          position: new google.maps.LatLng(location.latitude, location.longitude),
+          map: map,
+          title: location.title
+        });
+
+        // Add marker to the map
+        location.marker.setMap(map);
+    }
+
+    return {
+      "initialize": initialize
+    }
+  })();
