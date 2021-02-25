@@ -23,7 +23,7 @@ Landmark.init(
 		},
 		lat: {
 			// Lat and lon cannot be null
-			type: DataTypes.DECIMAL(8, 6),
+			type: DataTypes.DECIMAL(9, 7),
 			allowNull: false,
 			validate: {
 				min: -90,
@@ -31,7 +31,7 @@ Landmark.init(
 			},
 		},
 		lon: {
-			type: DataTypes.DECIMAL(9, 6),
+			type: DataTypes.DECIMAL(10, 7),
 			allowNull: false,
 			validate: {
 				min: -180,
@@ -66,12 +66,20 @@ Landmark.init(
 				if (Array.isArray(dbLandmarkData)) {
 					landmarks = dbLandmarkData.map(landmark => landmark.get({ plain: true }));
 					landmarks.forEach(landmark => {
+						// console.log(landmark);
+						landmark.lat = parseFloat(landmark.lat);
+						landmark.lon = parseFloat(landmark.lon);
+						// console.log(landmark.lat);
 						landmark.distance = haversineDistance([landmark.lat, landmark.lon], [user_lat, user_lon]);
 					});
 				} else {
 					landmarks = dbLandmarkData.get({ plain: true });
-					landmarks.distance = landmark.distance = haversineDistance([landmark.lat, landmark.lon], [user_lat, user_lon]);
+					landmarks.lat = parseFloat(landmark.lat);
+					landmarks.lon = parseFloat(landmark.lon);
+					// console.log(landmark.lat);
+					landmarks.distance = haversineDistance([landmark.lat, landmark.lon], [user_lat, user_lon]);
 				}
+
 				return landmarks.sort((a, b) => a.distance - b.distance);
 			},
 		},

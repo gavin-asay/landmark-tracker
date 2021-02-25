@@ -9,29 +9,24 @@ router.get('/:user_lat/:user_lon', async (req, res) => {
 	req.params.user_lon = parseFloat(req.params.user_lon);
 
 	try {
-		const dbLandmarkData = await Landmark.findAll(
-			{
-				where: {
-					[Op.and]: [
-						{
-							lat: {
-								[Op.between]: latRange(req.params.user_lat, 5),
-							},
+		const dbLandmarkData = await Landmark.findAll({
+			where: {
+				[Op.and]: [
+					{
+						lat: {
+							[Op.between]: latRange(req.params.user_lat, 5),
 						},
-						{
-							lon: {
-								[Op.between]: lonRange(req.params.user_lat, req.params.user_lon, 5),
-							},
+					},
+					{
+						lon: {
+							[Op.between]: lonRange(req.params.user_lat, req.params.user_lon, 5),
 						},
-					],
-				},
+					},
+				],
 			},
-			{
-				user_lat: req.params.user_lat,
-				user_lon: req.params.user_lon,
-			}
-		);
-
+			user_lat: req.params.user_lat,
+			user_lon: req.params.user_lon,
+		});
 		if (!dbLandmarkData) {
 			res.status(404).json({ message: 'No landmarks found in this area' });
 			return;
@@ -57,6 +52,49 @@ router.get('/:id', async (req, res) => {
 	}
 });
 
-router.post('/', async (req, res) => {});
+router.post('/', async (req, res) => {
+	// create new landmark
+	try {
+		const dbLandmarkData = await Landmark.create({
+			name: req.body.name,
+			address: req.body.address,
+			lat: req.body.lat,
+			lon: req.body.lon,
+			image_url: req.body.image_url,
+			added_by: req.session.user_id,
+		});
+
+		res.json(dbLandmarkData);
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
+
+router.put('/:id', async (req, res) => {
+	// likely used for adding missing data, like an image or address
+	try {
+		const dbLandmarkData = await Landmark.update(
+			{
+				name: req.body.name,
+				address: req.body.address,
+				lat: req.body.lat,
+				lon: req.body.lon,
+				image_url: req.body.image_url,
+				added_by: req.session.user_id,
+			},
+			{
+				where: {
+					id: req.params.id,
+				},
+			}
+		);
+
+		res.json(dbLandmarkData);
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
 
 module.exports = router;
