@@ -42,7 +42,6 @@ router.get('/:user_lat/:user_lon', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	// get single landmark, likely for pulling up user's saved favorites?
 	try {
-		console.log(options);
 		const dbLandmarkData = await Landmark.findByPk(req.params.id);
 
 		dbLandmarkData ? res.json(dbLandmarkData) : res.status(404).json({ message: 'No landmark under this id' });
