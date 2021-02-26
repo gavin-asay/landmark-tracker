@@ -72,15 +72,15 @@ Landmark.init(
 						// console.log(landmark.lat);
 						landmark.distance = haversineDistance([landmark.lat, landmark.lon], [user_lat, user_lon]);
 					});
+					return landmarks.sort((a, b) => a.distance - b.distance);
 				} else {
 					landmarks = dbLandmarkData.get({ plain: true });
-					landmarks.lat = parseFloat(landmark.lat);
-					landmarks.lon = parseFloat(landmark.lon);
+					landmarks.lat = parseFloat(landmarks.lat);
+					landmarks.lon = parseFloat(landmarks.lon);
 					// console.log(landmark.lat);
-					landmarks.distance = haversineDistance([landmark.lat, landmark.lon], [user_lat, user_lon]);
+					landmarks.distance = haversineDistance([landmarks.lat, landmarks.lon], [user_lat, user_lon]);
+					return landmarks;
 				}
-
-				return landmarks.sort((a, b) => a.distance - b.distance);
 			},
 		},
 	}
