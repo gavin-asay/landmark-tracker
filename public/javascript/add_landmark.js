@@ -18,4 +18,4 @@ navigator.geolocation.watchPosition(
   (err) => console.log(err)
 );
 
-module.exports = locationObj;
+module.exports = locationObj, locationsArr;
