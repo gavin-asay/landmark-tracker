@@ -23,7 +23,7 @@ const haversineDistance = ([lat1, lon1], [lat2, lon2], isMiles = true) => {
 	if (isMiles) {
 		finalDistance /= 1.60934;
 	}
-
+	console.log([lat1, lon1], [lat2, lon2]);
 	return finalDistance;
 };
 
