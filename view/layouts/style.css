@@ -14,3 +14,7 @@
   .d-none {
     display: none;
   }
+
+  .custom-buttons {
+    background-color: #03DAC6;
+  }

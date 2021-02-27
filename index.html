@@ -7,19 +7,30 @@
   <title>Landmark Tracker</title>
 
   <link href="./view/layouts/style.css" rel="stylesheet" />
+  <link href="./view/layouts/tailwind.css" rel="stylesheet">
 </head>
 
 <body>
 
   <main>
     <div id="map" class="mapArea"></div>
-    <div id="errorArea" class="alert d-none">
-    </div>
+    <div id="errorArea" class="alert d-none"></div>
+
+
+    <!--These buttons would only be availiable before the user actually signs in-->
+    <button id="sign-in" class="font-mono button border rounded-lg border-gray-500 custom-buttons" type="button">&nbsp;Sign In&nbsp;</button>
+    <button id="sign-up" class="font-mono button border rounded-lg border-gray-500 custom-buttons" type="button">&nbsp;Sign Up&nbsp;</button>
+
+    <!--These buttons would show up after the user signs in-->
+    <button id="add" class="font-mono button border rounded-lg border-gray-500 bg-green-600" type="button">&nbsp;Add Landmark&nbsp;</button>
+    <button id="delete" class="font-mono button border rounded-lg border-gray-500 bg-red-600" type="button">&nbsp;Delete Landmark&nbsp;</button>
+    <button id="sign-out" class="font-mono button border rounded-lg border-gray-500 custom-buttons" type="button">&nbsp;Sign out&nbsp;</button>
+
   </main>
 
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   <script src="./utils/google-maps.js"></script>
-  <script src="./public/javascript/add_landmark.js"></script>
+  <!-- <script src="./public/javascript/add_landmark.js"></script> -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMd2i_nedPspCAJnJ8CoKbtGeRAsf03Zk&callback=gmapController.initialize"
     type="text/javascript"></script>
 </body>
