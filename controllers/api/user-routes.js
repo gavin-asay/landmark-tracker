@@ -1,9 +1,4 @@
 const router = require("express").Router();
-<<<<<<< HEAD
-const { Landmark, User } = require("../../models");
-const { latRange, lonRange } = require("../../utils/distance");
-const { Op } = require("sequelize");
-=======
 const { User, Landmark } = require("../../models");
 
 router.get("/", (req, res) => {
@@ -123,6 +118,5 @@ router.delete("/:id", (req, res) => {
       res.status(500).json(err);
     });
 });
->>>>>>> b562232c4902bf3006be1b87dd360ecf0543f761
 
 module.exports = router;
