@@ -2,6 +2,10 @@ const router = require("express").Router();
 const { Landmark } = require("../../models");
 const { latRange, lonRange } = require("../../utils/distance");
 const { Op } = require("sequelize");
+<<<<<<< HEAD
+=======
+const withAuth = require("../../utils/auth");
+>>>>>>> b562232c4902bf3006be1b87dd360ecf0543f761
 
 router.get("/:user_lat/:user_lon", async (req, res) => {
   // get all landmarks in an area
@@ -100,6 +104,29 @@ router.put("/:id", async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
+<<<<<<< HEAD
+=======
+});
+
+router.delete("/:id", (req, res) => {
+  console.log("id", req.params.id);
+  Landmark.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((dbLandmarkData) => {
+      if (!dbLandmarkData) {
+        res.status(404).json({ message: "No landmark found with this id" });
+        return;
+      }
+      res.json(dbLandmarkData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+>>>>>>> b562232c4902bf3006be1b87dd360ecf0543f761
 });
 
 module.exports = router;
