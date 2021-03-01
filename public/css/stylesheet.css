@@ -1,4 +1,8 @@
 #map {
-    height: 500px;
-    width: 1000px;
+    height: 950px;
+    width: 800px;
+}
+
+.custom-buttons {
+    background-color: #03DAC6;
 }
