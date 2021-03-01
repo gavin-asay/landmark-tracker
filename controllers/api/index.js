@@ -1,7 +1,9 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const LandmarkRoutes = require('./landmark-routes');
+const LandmarkRoutes = require("./landmark-routes");
+const UserRoutes = require("./user-routes");
 
-router.use('/landmarks', LandmarkRoutes);
+router.use("/users", UserRoutes);
+router.use("/landmarks", LandmarkRoutes);
 
 module.exports = router;
