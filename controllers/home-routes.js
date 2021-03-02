@@ -29,4 +29,12 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/account", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+  res.render("account");
+});
+
 module.exports = router;
