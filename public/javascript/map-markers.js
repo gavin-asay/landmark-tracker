@@ -39,6 +39,21 @@ async function initMap() {
 				title: name,
 			});
 			markers.push(marker);
+
+			const contentString =
+			'<div id="content">' +
+			'<div id="siteNotice">' +
+			"</div>" +
+			'<h1 id="firstHeading" class="firstHeading"> ${name} </h1>' +
+			"</div>";
+	  
+			const infowindow = new google.maps.InfoWindow({
+			  content: contentString,
+			});
+	  
+			marker.addListener("click", () => {
+			  infowindow.open(map, marker);
+			});
 		}
 	}
 
