@@ -37,4 +37,20 @@ router.get("/account", (req, res) => {
   res.render("account");
 });
 
+router.get("/addLandmark", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+  res.render("addLandmark");
+});
+
+router.get("/deleteLandmark", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+  res.render("deleteLandmark");
+});
+
 module.exports = router;

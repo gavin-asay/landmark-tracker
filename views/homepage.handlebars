@@ -26,3 +26,9 @@
   &nbsp;Sign In/Up&nbsp;
 </button>
 {{/if}}
+
+{{#if loggedIn}}
+<script src="/javascript/signed-in-homepage.js"></script>
+{{else}}
+<script src="/javascript/signed-out-homepage.js"></script>
+{{/if}}
