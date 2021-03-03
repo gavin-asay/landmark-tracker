@@ -50,28 +50,34 @@ async function initMap() {
 				return;
 			}
 
-			navigator.geolocation.getCurrentPosition(pos => {
-				if (!map) resolve(pos);
-				// if map isn't made yet, get position for map center
-				// otherwise, record current location
-				else {
-					if (haversineDistance([pos.coords.latitude, pos.coords.longitude], [currentCoords.lon, currentCoords.lng]) > 0.095) {
-						// if position changes by 0.095 mi (about 500 ft), fetch landmarks for new position
-						currentCoords.lat = pos.coords.latitude;
-						currentCoords.lng = pos.coords.longitude;
+			navigator.geolocation.getCurrentPosition(
+				pos => {
+					if (!map) resolve(pos);
+					// if map isn't made yet, get position for map center
+					// otherwise, record current location
+					else {
+						if (haversineDistance([pos.coords.latitude, pos.coords.longitude], [currentCoords.lon, currentCoords.lng]) > 0.095) {
+							// if position changes by 0.095 mi (about 500 ft), fetch landmarks for new position
+							currentCoords.lat = pos.coords.latitude;
+							currentCoords.lng = pos.coords.longitude;
 
-						for (let i = 0; i < markers.length; i++) {
-							markers[i].setMap(null);
+							for (let i = 0; i < markers.length; i++) {
+								markers[i].setMap(null);
+							}
+							markers = [];
+
+							getLandmarks(currentCoords.lat, currentCoords.lng);
+						} else {
+							currentCoords.lat = pos.coords.latitude;
+							currentCoords.lng = pos.coords.longitude;
 						}
-						markers = [];
-
-						getLandmarks(currentCoords.lat, currentCoords.lng);
-					} else {
-						currentCoords.lat = pos.coords.latitude;
-						currentCoords.lng = pos.coords.longitude;
 					}
+				},
+				err => {
+					document.querySelector('#map').textContent = 'Location not available';
+					reject(err);
 				}
-			});
+			);
 		});
 	}
 
