@@ -1,0 +1,25 @@
+.mapArea {
+  width: 90%;
+  height: 500px;
+}
+
+#map {
+  height: 500px;
+  width: 1000px;
+}
+
+.alert {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em;
+  background-color: red;
+  color: white;
+}
+
+.d-none {
+  display: none;
+}
+
+.custom-buttons {
+  background-color: #03dac6;
+}
