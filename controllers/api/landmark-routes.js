@@ -27,6 +27,7 @@ router.get('/:user_lat/:user_lon', async (req, res) => {
 			},
 			user_lat: parseFloat(req.params.user_lat),
 			user_lon: parseFloat(req.params.user_lon),
+			user_id: req.session.user_id,
 		});
 		if (!dbLandmarkData) {
 			res.status(404).json({ message: 'No landmarks found in this area' });

@@ -59,26 +59,25 @@ Landmark.init(
 		freezeTableName: true,
 		modelName: 'landmark',
 		hooks: {
-			afterFind(dbLandmarkData, { user_lat, user_lon }) {
+			afterFind(dbLandmarkData, { user_lat, user_lon, user_id }) {
 				// this will automatically serialize the data, add the distance from user's location to each landmark, and sort the results by distance
 				// assuming it works, don't have any data to test it on yet
 				let landmarks;
 				if (Array.isArray(dbLandmarkData)) {
 					landmarks = dbLandmarkData.map(landmark => landmark.get({ plain: true }));
 					landmarks.forEach(landmark => {
-						// console.log(landmark);
 						landmark.lat = parseFloat(landmark.lat);
 						landmark.lon = parseFloat(landmark.lon);
-						// console.log(landmark.lat);
 						landmark.distance = haversineDistance([landmark.lat, landmark.lon], [user_lat, user_lon]);
+						landmark.isOwner = landmark.added_by === user_id ? true : false;
 					});
 					return landmarks.sort((a, b) => a.distance - b.distance);
 				} else {
 					landmarks = dbLandmarkData.get({ plain: true });
 					landmarks.lat = parseFloat(landmarks.lat);
 					landmarks.lon = parseFloat(landmarks.lon);
-					// console.log(landmark.lat);
 					landmarks.distance = haversineDistance([landmarks.lat, landmarks.lon], [user_lat, user_lon]);
+					landmarks.isOwner = landmarks.added_by === user_id ? true : false;
 					return landmarks;
 				}
 			},
