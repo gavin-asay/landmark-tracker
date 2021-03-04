@@ -19,13 +19,13 @@ async function loginFormHandler(event) {
 		if (!data.message && !data.errors) {
 			document.location.replace('/');
 		} else if (data.message === 'Incorrect password!') {
-			while (document.querySelector('.error')) document.querySelector('.error');
+			while (document.querySelector('.error')) document.querySelector('.error').remove();
 			const errMsg = document.createElement('p');
 			errMsg.className = 'error';
 			errMsg.textContent = 'Incorrect password!';
 			document.querySelector('.login-form').appendChild(errMsg);
 		} else if (data.message === 'No user with that email address!') {
-			while (document.querySelector('.error')) document.querySelector('.error');
+			while (document.querySelector('.error')) document.querySelector('.error').remove();
 			const errMsg = document.createElement('p');
 			errMsg.className = 'error';
 			errMsg.textContent = 'No user found with this email address!';
@@ -45,7 +45,7 @@ async function signupFormHandler(event) {
 
 	if (username && email && password) {
 		if (password.length < 8) {
-			while (document.querySelector('.error')) document.querySelector('.error');
+			while (document.querySelector('.error')) document.querySelector('.error').remove();
 			const errMsg = document.createElement('p');
 			errMsg.className = 'error';
 			errMsg.textContent = 'Password must be at least 8 characters';
@@ -69,7 +69,7 @@ async function signupFormHandler(event) {
 			document.location.replace('/');
 		} else if (data.errors[0].type === 'unique violation') {
 			const errField = data.errors[0].path.split('.')[1];
-			while (document.querySelector('.error')) document.querySelector('.error');
+			while (document.querySelector('.error')) document.querySelector('.error').remove();
 			const errMsg = document.createElement('p');
 			errMsg.className = 'error';
 			errMsg.textContent = `Error: ${errField} is already in use. Please enter a different ${errField}.`;
