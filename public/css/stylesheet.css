@@ -13,13 +13,22 @@
 .custom-buttons {
   background-color: #03dac6;
 }
+
 nav {
   background-color: #03dac6;
 }
 
-button {
+main > button {
   width: 60%;
   transform: translate(35%, -60%);
+}
+
+.delete {
+  font-size: 0.7em;
+}
+
+.error {
+  color: red;
 }
 
 @media screen and (max-width: 768px) {
@@ -29,7 +38,7 @@ button {
     height: 850px;
   }
 
-  button {
+  main > button {
     width: 98%;
     transform: translate(1%, 0%);
   }
@@ -42,7 +51,7 @@ button {
     height: 600px;
   }
 
-  button {
+  main > button {
     width: 98%;
     transform: translate(1%, 0%);
   }

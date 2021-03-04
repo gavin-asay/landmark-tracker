@@ -44,7 +44,6 @@ async function initMap() {
 			<div id="siteNotice"> 
 			</div>
 			<h1 id="firstHeading" class="firstHeading"> ${name} </h1>
-			${landmarks[i].isOwner ? `<button class="l-delete">Delete Landmark</button>` : ``}
 			</div>`;
 
 			const infowindow = new google.maps.InfoWindow({
