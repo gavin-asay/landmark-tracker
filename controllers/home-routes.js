@@ -46,11 +46,19 @@ router.get("/addLandmark", (req, res) => {
 });
 
 router.get("/deleteLandmark", (req, res) => {
-  if (!req.session.loggedIn) {
-    res.redirect("/");
-    return;
-  }
-  res.render("deleteLandmark");
+  Landmark.findAll({
+    where: {
+      added_by: req.session.added_by,
+    },
+    attributes: ["id", "name", "address", "lat", "lon"],
+  }).then((dbLandmarkData) => {
+    const landmarks = dbLandmarkData.map((landmark) =>
+      landmark.get({
+        plain: true,
+      })
+    );
+    console.log(landmarks);
+  });
 });
 
 module.exports = router;

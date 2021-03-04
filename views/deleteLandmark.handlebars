@@ -1,0 +1,19 @@
+<div class="grid grid-cols-4 gap-4">
+  <div class="col-start-2 col-span-2">
+    {{#if landmarks.length}}
+    <section>
+      <h2>Your Posts</h2>
+      <ol>
+        {{#each landmarks as |landmark|}}
+        <li>
+          {{> post-info post}}
+          <a href="/landmarks/delete/{{landmark.id}}" class="delete-link">Delete Landmark</a>
+        </li>
+        {{/each}}
+      </ol>
+    </section>
+    {{/if}}
+  </div>
+</div>
+
+<script src="/javascript/add_landmark.js"></script>
