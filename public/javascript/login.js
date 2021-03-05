@@ -16,7 +16,7 @@ async function loginFormHandler(event) {
 
 		const data = await response.json();
 
-		if (!data.message && !data.errors) {
+		if (data.message !== 'You are now logged in!' && !data.errors) {
 			document.location.replace('/');
 		} else if (data.message === 'Incorrect password!') {
 			while (document.querySelector('.error')) document.querySelector('.error').remove();
