@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS landmarks_db;
+CREATE DATABASE landmarks_db;
